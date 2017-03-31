@@ -26,11 +26,14 @@ def click_enter():
 
           scrollbar.config(command=textarea.yview)
 
-          Add_Button=tk.Button(main , text="Add", command ="", relief= "raised" )
+          Add_Button=tk.Button(main , text="Save", command ="", relief= "raised" )
           Add_Button.place(x=250,y=440)
           Enter_Button.destroy()
       else:
           tk.Label(frame1,text="Retry").grid(row=1,columnspan=2)
+
+
+
 
 
 
@@ -42,8 +45,6 @@ init_pass=tk.Entry(frame1,show="•",textvariable=store_pass).grid(row = 0 ,colu
 
 Enter_Button=tk.Button(main , text="Enter", command = click_enter, relief= "raised" )
 Enter_Button.place(x=180,y=140)
-
-
 
 
 
