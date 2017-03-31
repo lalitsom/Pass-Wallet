@@ -45,8 +45,9 @@ frame1 = tk.LabelFrame (main_window , text = "PASS-WALLET")
 frame1.place(relx=0.5,rely=0.5, anchor="center")
 tk.Message(frame1, text ="Enter the password to access your wallet", width=125).grid(row = 0,column = 0 )
 store_pass= tk.StringVar()
-init_pass=tk.Entry(frame1,show="•",textvariable=store_pass).grid(row = 0 ,column = 1 )
-main_window.bind('<Return>', click_enter)  #whenever enterkey is pressed try opening the wallet
+init_pass=tk.Entry(frame1,show="•",textvariable=store_pass)
+init_pass.grid(row = 0 ,column = 1 )
+init_pass.bind('<Return>', click_enter)  #whenever enterkey is pressed try opening the wallet
 
 Enter_Button=tk.Button(main_window , text="Enter", command = lambda: click_enter(0), relief= "raised" )
 Enter_Button.place(x=180,y=140)
