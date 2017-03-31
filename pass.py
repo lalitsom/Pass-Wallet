@@ -9,7 +9,7 @@ main_window.geometry("400x200")
 
 
 def click_enter(self):
-      global frame1,frame2,store_pass
+      global frame1,frame2,store_pass,textarea
       check_pass=store_pass.get()
       if (check_pass=="walletpassword"):
           frame1.destroy()
@@ -26,14 +26,18 @@ def click_enter(self):
 
           scrollbar.config(command=textarea.yview)
 
-          Add_Button=tk.Button(main_window , text="Save", command ="", relief= "raised" )
+          Add_Button=tk.Button(main_window , text="Save", command =on_save_click, relief= "raised" )
           Add_Button.place(x=250,y=440)
           Enter_Button.destroy()
       else:
           tk.Label(frame1,text="Retry").grid(row=1,columnspan=2)
 
 
-
+def on_save_click():
+    global textarea
+    store_data=textarea.get('1.0',"end")
+    with open("test.pas", "w") as file:
+        file.writelines(store_data)
 
 
 
@@ -44,7 +48,7 @@ store_pass= tk.StringVar()
 init_pass=tk.Entry(frame1,show="•",textvariable=store_pass).grid(row = 0 ,column = 1 )
 main_window.bind('<Return>', click_enter)  #whenever enterkey is pressed try opening the wallet
 
-Enter_Button=tk.Button(main_window , text="Enter", command = click_enter, relief= "raised" )
+Enter_Button=tk.Button(main_window , text="Enter", command = lambda: click_enter(0), relief= "raised" )
 Enter_Button.place(x=180,y=140)
 
 
