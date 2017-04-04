@@ -66,8 +66,8 @@ def click_enter(self):
           _thread.start_new_thread( start_auto_save,(1,0))
           Enter_Button.destroy()
       else:
-          tk.Label(login_frame,text="Retry").pack()
-
+          global login_msg
+          login_msg.config(text="Retry! Wrong Password",fg="red")
 
 
 #gui......................
@@ -100,6 +100,11 @@ add_margin(1,login_frame,"#282c34")
 Enter_Button=tk.Button(login_frame , text="Login", command = lambda: click_enter(0), relief= "raised" , bg ="#4285fa",fg="white",font=("Arial","15","bold") )
 Enter_Button.pack()
 Enter_Button.config(height=1, width=9)
+
+add_margin(1,login_frame,"#282c34")
+
+login_msg = tk.Label(login_frame,text="Please Enter Password",bg="#282c34",fg="green",font=("Arial","10","bold"),pady="50")
+login_msg.pack()
 
 
 main_window.mainloop()
