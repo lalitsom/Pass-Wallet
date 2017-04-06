@@ -65,9 +65,9 @@ def get_saved_file_content():
     with open('sfile.wallet', 'rb') as content_file:
         content = content_file.read()
         global local_password
-        key = get_key(str.encode(local_password))        
+        key = get_key(str.encode(local_password))
         f = Fernet(key)
-        token = f.decrypt((content))
+        token = f.decrypt(bytes(content))
         return token
 
 def get_key(password):
@@ -79,12 +79,12 @@ def get_key(password):
 
 def save_to_file():
     global textarea
-    store_data=textarea.get('1.0',"end")
+    store_data="" + textarea.get('1.0',"end")
     with open("sfile.wallet", "wb") as file:
         global local_password
         key = get_key(str.encode(local_password))
         f = Fernet(key)
-        token = f.encrypt(str.encode(store_data))
+        token = f.encrypt(store_data.encode('ascii'))
         #first encrypt then save to file
         file.write(token)
 
@@ -167,6 +167,7 @@ def click_enter(self):
 #gui......................
 
 main_window=tk.Tk()   #main_window the root container
+main_window.wm_title("Pass-Wallet")
 main_window.configure(background="#282c34")
 main_window.geometry("300x350")
 main_window.resizable(width=False, height =False)
