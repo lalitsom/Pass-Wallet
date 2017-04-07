@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
+import tkinter.messagebox
 import _thread
 import time
 import os
@@ -110,7 +111,9 @@ def try_create_password(self):
         create_files()
         create_save_pass( str.encode(check_pass) )
         login_frame.destroy()
-        main_window.geometry("500x500")
+        main_window.geometry("200x500")
+        main_window.resizable(width=True, height =False)
+        
 
         text_frame = tk.Frame(main_window, height="500", width="500", bg="#282c34")
         text_frame.pack_propagate(0)
@@ -139,12 +142,14 @@ def click_enter(self):
           global local_password
           local_password = check_pass
           login_frame.destroy()
-          main_window.geometry("500x500")
+          main_window.geometry("200x500")
+          main_window.resizable(width=True, height =False)
+
 
           text_frame = tk.Frame(main_window, height="500", width="500", bg="#282c34")
           text_frame.pack_propagate(0)
 
-          text_frame.pack(fill="x",expand=False)
+          text_frame.pack(fill="both",expand=False)
           scrollbar = tk.Scrollbar(text_frame)
           scrollbar.pack(side="right", fill="y")
 
@@ -161,7 +166,11 @@ def click_enter(self):
           Enter_Button.destroy()
       else:
           global login_msg
-          login_msg.config(text="Retry! Wrong Password",fg="red")
+          login_msg.config(text="Retry! Wrong Password",fg="#F48024")
+
+
+def show_msg(_self):
+        tk.messagebox.showinfo('About Pass-Wallet','Made by Lalit Som\n version 1.0.0\nStore all your passwords and secrets at one place.\nCompeletely safe from everyone.\nFeedback: mail me at->  lalitsom27@gmail.com')
 
 
 #gui......................
@@ -171,6 +180,7 @@ main_window.wm_title("Pass-Wallet")
 main_window.configure(background="#282c34")
 main_window.geometry("300x350")
 main_window.resizable(width=False, height =False)
+#main_window.minsize(300,300)
 
 
 
@@ -178,7 +188,9 @@ login_frame = tk.Frame(main_window, height="350", width="300", bg="#282c34")
 login_frame.pack(fill=None, expand=True)
 login_frame.pack_propagate(0)
 
-
+help_ = tk.Label(login_frame,text="?",bg="#282c34",fg="white")
+help_.pack(anchor="e")
+help_.bind('<Button-1>',show_msg)
 
 
 head_name = tk.Label(login_frame,text="PASS - WALLET",bg="#282c34",fg="white",font=("Arial","16","bold"),pady="50")
@@ -198,7 +210,7 @@ Enter_Button.config(height=1, width=9)
 
 add_margin(1,login_frame,"#282c34")
 
-login_msg = tk.Label(login_frame,text="Please Enter Password",bg="#282c34",fg="green",font=("Arial","10","bold"),pady="50")
+login_msg = tk.Label(login_frame,text="Please Enter Password",bg="#282c34",fg="#17a15e",font=("Arial","10","bold"),pady="50")
 login_msg.pack()
 
 check_files()
